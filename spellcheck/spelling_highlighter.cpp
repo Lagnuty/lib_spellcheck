@@ -933,10 +933,9 @@ void SpellingHighlighter::fillSpellcheckerMenu(
 				firstSuggestionIndex = menu->actions().size();
 			}
 			auto replaceWord = [=] {
-				const auto oldTextCursor = _textEdit->textCursor();
-				_textEdit->setTextCursor(newTextCursor);
-				_textEdit->textCursor().insertText(suggestion);
-				_textEdit->setTextCursor(oldTextCursor);
+				auto cursor = newTextCursor;
+				cursor.insertText(suggestion);
+				_textEdit->setTextCursor(cursor);
 			};
 			menu->addAction(suggestion, std::move(replaceWord));
 		}
